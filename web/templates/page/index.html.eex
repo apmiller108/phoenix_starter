@@ -1,0 +1,1 @@
+<h1><%= gettext "It's the  %{name}", name: "Phoenix Starter" %></h1>
