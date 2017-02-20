@@ -17,6 +17,11 @@ defmodule PhoenixStarter.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    # Session and user routes 
+    resources "/users", UserController, only: [:create]
+    get "/sign_up", UserController, :new
+    get "/profile", UserController, :show
   end
 
   # Other scopes may use custom stacks.
