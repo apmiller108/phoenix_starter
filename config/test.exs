@@ -17,3 +17,6 @@ config :phoenix_starter, PhoenixStarter.Repo,
   database: "phoenix_starter_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Reduce the number of bcrypt rounds to not slow tests too much.
+config :comeonin, :bcrypt_log_rounds, 4
