@@ -26,7 +26,7 @@ defmodule PhoenixStarter.Mixfile do
        :gettext,
        :phoenix_ecto, 
        :postgrex,
-       :comonin]]
+       :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
