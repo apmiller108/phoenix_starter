@@ -25,3 +25,13 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+# Configures guardian
+config :guardian, Guardian,
+  allowed_algos: ["ES512"],
+  verify_module: Guardian.JWT,
+  issuer: "Founders",
+  ttl: { 30, :days },
+  verify_issuer: true,
+  secret_key: fn -> JOSE.JWK.from_file('secret_key.json') end,
+  serializer: PhoenixStarter.GuardianSerializer

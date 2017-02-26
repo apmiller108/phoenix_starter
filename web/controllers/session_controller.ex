@@ -1,5 +1,8 @@
 defmodule PhoenixStarter.SessionController do
-  use PhoenixStarter.Web, :controller
+  use    PhoenixStarter.Web, :controller
+  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+
+  alias PhoenixStarter.User
 
   plug :scrub_params, "session" when action in [:create]
 
@@ -7,18 +10,10 @@ defmodule PhoenixStarter.SessionController do
     render conn, "new.html"
   end
 
-  def create(conn, session_params) do
+  def create(conn, %{"session" => %{"email" => email, "password" => password} }) do
+    user = Repo.get_by(User, email: email)
   end
 
   def delete(conn, _) do
-  end
-
-  defp session_params do
-    %{
-      "session" => %{
-        "email" => email, 
-        "password" => password
-      }
-    }
   end
 end

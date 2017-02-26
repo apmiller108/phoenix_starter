@@ -17,6 +17,8 @@ defmodule PhoenixStarter.User do
     struct
     |> cast(params, [:email])
     |> validate_required(@required_fields)
+    |> validate_format(:email, ~r/^.+@.+$/)
+    |> unique_constraint(:email)
   end
 
   def registration_changeset(struct, params) do
