@@ -18,7 +18,8 @@ defmodule PhoenixStarter.Router do
 
     # Session and user routes 
     resources "/users", UserController, only: [:create]
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/sessions", SessionController, only: [:create, :delete]
+    get "/sign_in", SessionController, :new
     get "/sign_up", UserController, :new
     get "/profile", UserController, :show
 

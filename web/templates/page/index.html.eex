@@ -4,5 +4,5 @@
   <%= link "Register", to: user_path(@conn, :new) %>
 </div>
 <div>
-  <%= link "Sign up",  to: session_path(@conn, :new) %>
+  <%= link "Sign in",  to: session_path(@conn, :new) %>
 </div>
