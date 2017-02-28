@@ -11,11 +11,11 @@ defmodule PhoenixStarter.SessionControllerTest do
   end
 
   test "POST /sessions logs in user with good credentials", %{conn: conn} do
-    insert(:user)
+    user = insert(:user)
     conn = post(conn, 
                 "/sessions", 
                 %{session: %{email: "user@example.com", password: "password"}})
-    # TODO: finish create action and test
 
+    assert html_response(conn, 302) =~ "<a href=\"/\">redirected</a>"
   end
 end

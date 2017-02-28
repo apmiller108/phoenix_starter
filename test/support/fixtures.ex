@@ -12,7 +12,8 @@ defmodule PhoenixStarter.Fixtures do
   end
 
   def insert(:user) do
-    Repo.insert! build(:user)
+    User.registration_changeset(%User{}, attrs(:user))
+    |> Repo.insert!
   end
 end
 

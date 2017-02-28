@@ -33,5 +33,13 @@ config :guardian, Guardian,
   issuer: "Founders",
   ttl: { 30, :days },
   verify_issuer: true,
-  secret_key: fn -> JOSE.JWK.from_file('secret_key.json') end,
+  secret_key: %{
+    "alg" => "ES512", 
+    "crv" => "P-521",
+    "d" => "zEnG-1nYErox4XMMc--L5OmeyK-fCiTRD8ESH20hGCoCTQJrw2I7mh7Vwdx2QTKZLulfe0_V3jxjPerJle1Usa8",
+    "kty" => "EC", 
+    "use" => "sig",
+    "x" =>  "AcwOAGDvSdWXeE3BL5LAA3wg34tfOIkDST8FHNxJXMyE7qM7PHkS-SutYnD07-Q7Weey9dQq4a438hegesVVgivO",
+    "y" => "Aa0AMHdmcSBm3gTCLgJp-fGjuaEV-jZ3wulPOYJNHX2gDB4ilqdxGHGxAL8XKcXWhkE_shFdcPcUlF2CT27AEQKR"
+  },
   serializer: PhoenixStarter.GuardianSerializer
