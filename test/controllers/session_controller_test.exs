@@ -18,4 +18,12 @@ defmodule PhoenixStarter.SessionControllerTest do
 
     assert html_response(conn, 302) =~ "<a href=\"/\">redirected</a>"
   end
+
+  test "DELETE /sessions logs out user", %{conn: conn} do
+    user = insert(:user)
+
+    conn = post(conn, "/sessions/#{user.id}", %{"_method" => "delete"})
+
+    assert html_response(conn, 302) =~ "<a href=\"/\">redirected</a>"
+  end
 end

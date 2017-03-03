@@ -36,10 +36,18 @@ defmodule PhoenixStarter.SessionController do
   end
 
   def delete(conn, _) do
+    conn
+    |> logout
+    |> put_flash(:info, "Logged out")
+    |> redirect(to: page_path(conn, :index))
   end
 
   defp login(conn, user) do
     conn
     |> Guardian.Plug.sign_in(user)
+  end
+
+  defp logout(conn) do
+    Guardian.Plug.sign_out(conn)
   end
 end

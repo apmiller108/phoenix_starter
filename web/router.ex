@@ -13,8 +13,14 @@ defmodule PhoenixStarter.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :with_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+    plug PhoenixStarter.CurrentUser
+  end
+
   scope "/", PhoenixStarter do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :with_session]
 
     # Session and user routes 
     resources "/users", UserController, only: [:create]
