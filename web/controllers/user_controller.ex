@@ -21,6 +21,7 @@ defmodule PhoenixStarter.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
+        |> PhoenixStarter.Auth.login(user)
         |> put_flash(:info, "#{user.email} created")
         |> redirect(to: user_path(conn, :show, %{id: user.id}))
       {:error, changeset} ->

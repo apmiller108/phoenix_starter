@@ -1,8 +1,7 @@
 defmodule PhoenixStarter.SessionController do
   use    PhoenixStarter.Web, :controller
-  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
-  alias PhoenixStarter.User
+  alias PhoenixStarter.Auth
 
   plug :scrub_params, "session" when action in [:create]
 
@@ -11,19 +10,8 @@ defmodule PhoenixStarter.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password} }) do
-    user = Repo.get_by(User, email: email)
 
-    result = cond do
-      user && checkpw(password, user.password_hash) ->
-        {:ok, login(conn, user)}
-      user ->
-        {:error, :unauthorized, conn}
-      true ->
-        dummy_checkpw()
-        {:error, :not_found, conn}
-    end
-
-    case result do
+    case Auth.login_with_email_and_password(conn, email, password) do
       {:ok, conn} -> 
         conn
         |> put_flash(:info, "Logged in")
@@ -37,17 +25,8 @@ defmodule PhoenixStarter.SessionController do
 
   def delete(conn, _) do
     conn
-    |> logout
+    |> Auth.logout
     |> put_flash(:info, "Logged out")
     |> redirect(to: page_path(conn, :index))
-  end
-
-  defp login(conn, user) do
-    conn
-    |> Guardian.Plug.sign_in(user)
-  end
-
-  defp logout(conn) do
-    Guardian.Plug.sign_out(conn)
   end
 end
