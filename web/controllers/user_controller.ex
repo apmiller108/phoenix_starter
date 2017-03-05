@@ -5,17 +5,24 @@ defmodule PhoenixStarter.UserController do
 
   plug :scrub_params, "user" when action in [:create]
 
-  def show(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
-    render(conn, "show.html", user: user)
+  def action(conn, _) do
+    apply(__MODULE__, action_name(conn), [
+            conn,
+            conn.params,
+            conn.assigns.current_user
+          ])
   end
 
-  def new(conn, _params) do
+  def show(conn, _params, current_user) do
+    render(conn, "show.html", user: current_user)
+  end
+
+  def new(conn, _params, _current_user) do
     changeset = User.changeset(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, %{"user" => user_params}, _current_user) do
     changeset = %User{} |> User.registration_changeset(user_params)
 
     case Repo.insert(changeset) do

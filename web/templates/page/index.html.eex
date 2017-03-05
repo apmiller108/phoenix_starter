@@ -1,7 +1,7 @@
-<h1><%= gettext "It's the  %{name}", name: "Phoenix Starter" %></h1>
+<h1><%= gettext "It's the  %{name}", name: "PhoenixStarter" %></h1>
 
 <div>
-  <%= link "Register", to: user_path(@conn, :new) %>
+  <%= unless @current_user, do: link "Register", to: user_path(@conn, :new) %>
 </div>
 <div>
   <%= if @current_user do %>

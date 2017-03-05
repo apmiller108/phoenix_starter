@@ -29,6 +29,16 @@ defmodule PhoenixStarter.ConnCase do
 
       # The default endpoint for testing
       @endpoint PhoenixStarter.Endpoint
+
+      # Login a user
+      def guardian_login(conn, user, token \\ :token, opts \\ []) do
+        conn
+        |> bypass_through(PhoenixStarter.Router, [:browser])
+        |> get("/")
+        |> Guardian.Plug.sign_in(user, token, opts)
+        |> send_resp(200, "")
+        |> recycle()
+      end
     end
   end
 

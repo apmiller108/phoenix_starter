@@ -1,6 +1,6 @@
 defmodule PhoenixStarter.UserControllerTest do
   use    PhoenixStarter.ConnCase
-  import Ecto.Query, only: [last: 1]
+  import PhoenixStarter.Auth
   import PhoenixStarter.Fixtures
 
   alias PhoenixStarter.User
@@ -19,9 +19,7 @@ defmodule PhoenixStarter.UserControllerTest do
       }
     }
 
-    %{id: id} = User |> last |> Repo.one
-
-    assert html_response(conn, 302) =~ "/profile?id=#{id}"
+    assert html_response(conn, 302) =~ "/profile" 
   end
 
   test "POST /users with invalid input renders new", %{conn: conn} do
@@ -30,11 +28,20 @@ defmodule PhoenixStarter.UserControllerTest do
     assert html_response(conn, 200) =~ ~r/User\sRegistration/
   end
 
-  test "GET /profile?id= shows the user profile", %{conn: conn} do
-    %{id: id, email: email} = insert(:user)
-    
-    conn = get conn, "/profile?id=#{id}"
+  test "GET /profile shows the user profile", %{conn: conn} do
+    user = insert(:user)
 
-    assert html_response(conn, 200) =~ email
+    conn = 
+      conn
+      |> guardian_login(user)
+      |> get("/profile")
+
+    assert html_response(conn, 200) =~ user.email
+  end
+
+  test "GET /profile for unathenticated users", %{conn: conn} do
+    conn = get conn, "/profile"
+
+    assert html_response(conn, 302) =~ "/sign_in"
   end
 end

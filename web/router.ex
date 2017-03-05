@@ -19,18 +19,28 @@ defmodule PhoenixStarter.Router do
     plug PhoenixStarter.CurrentUser
   end
 
+  pipeline :login_required do
+    plug Guardian.Plug.EnsureAuthenticated, 
+         handler: PhoenixStarter.GuardianErrorHandler
+  end
+
   scope "/", PhoenixStarter do
     pipe_through [:browser, :with_session]
+
+    # Static page routes
+    get "/", PageController, :index
 
     # Session and user routes 
     resources "/users", UserController, only: [:create]
     resources "/sessions", SessionController, only: [:create, :delete]
     get "/sign_in", SessionController, :new
     get "/sign_up", UserController, :new
-    get "/profile", UserController, :show
 
-    # Static page routes
-    get "/", PageController, :index
+    # Registered user routes
+    scope "/" do
+      pipe_through [:login_required]
+      get "/profile", UserController, :show
+    end
   end
 
   # Other scopes may use custom stacks.
