@@ -1,9 +1,6 @@
 defmodule PhoenixStarter.UserControllerTest do
   use    PhoenixStarter.ConnCase
-  import PhoenixStarter.Auth
   import PhoenixStarter.Fixtures
-
-  alias PhoenixStarter.User
 
   test "GET /user/new", %{conn: conn} do
     conn = get conn, "/sign_up"
