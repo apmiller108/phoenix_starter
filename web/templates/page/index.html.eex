@@ -10,3 +10,22 @@
     <%= link "Sign in",  to: session_path(@conn, :new) %>
   <% end %>
 </div>
+<div>
+  <h3>What's in it?</h3>
+  <ul>
+    <li>
+      Password hashing with 
+      <%= link "comeonin", to: "https://github.com/riverrun/comeonin" %>
+    </li>
+    <li>
+      Browser authentication with
+      <%= link "guardian", to: "https://github.com/ueberauth/guardian" %>
+    </li>
+    <li>Simple user model with email and password, and basic validations</li>
+    <li>Postgres for persistence</li>
+    <li>
+      <%= link "Bulma", to: "http://bulma.io/" %> 
+      as css framework and grid system
+    </li>
+  </ul>
+</div>
