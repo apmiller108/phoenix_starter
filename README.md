@@ -5,7 +5,8 @@
   * Browser authentication with
     [*guardian*](https://github.com/ueberauth/guardian)
   * Simple user model with `email` and `password` with basic validations
-  * Postgres
+  * Postgres for persistence
+  * [*Bulma*](http://bulma.io/) as css framework and grid system
 
 **To rename the app**
   * Edit `rename.sh`: Replace `NewName` with `YourAppName`. Replace `new_name`
