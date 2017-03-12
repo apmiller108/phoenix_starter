@@ -1,10 +1,15 @@
-<h1>Sign in</h1>
-<%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
-  <div>
-    <%= text_input f, :email, placeholder: "Email" %>
-  </div>
-  <div>
-    <%= password_input f, :password, placeholder: "Password" %>
-  </div>
-  <%= submit "Sign in" %>
-<% end %>
+<div class="container">
+  <h1>Sign in</h1>
+  <%= form_for @conn, session_path(@conn, :create), [as: :session, class: "global-form"], fn f -> %>
+    <div class="control">
+      <%= text_input f, :email, placeholder: "Email", class: "input" %>
+    </div>
+    <div class="control">
+      <%= password_input f, :password, placeholder: "Password", class: "input" %>
+    </div>
+    <div class="control">
+      <%= submit "Sign in", class: "button is-primary" %>
+    </div>
+    <%= link "back", to: page_path(@conn, :index) %>
+  <% end %>
+</div>

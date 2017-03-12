@@ -1,19 +1,22 @@
-<h1>User Registration</h1>
-<%= form_for @changeset, user_path(@conn, :create), fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>There are some errors</p>
+<div class="container">
+  <h1>User Registration</h1>
+  <%= form_for @changeset, user_path(@conn, :create), [class: "global-form"], fn f -> %>
+    <%= if @changeset.action do %>
+      <div>
+        <span class="help is-danger">There are some errors</span>
+      </div>
+    <% end %>
+    <div class="control">
+      <%= text_input f, :email, placeholder: "Email", class: "input" %>
+      <%= error_tag f, :email %>
     </div>
+    <div class="control">
+      <%= password_input f, :password, placeholder: "Password", class: "input" %>
+      <%= error_tag f, :password %>
+    </div>
+    <div class="control">
+      <%= submit "Create User", class: "button is-primary" %>
+    </div>
+    <%= link "back", to: page_path(@conn, :index) %>
   <% end %>
-  <div class="form-group">
-    <%= text_input f, :email, placeholder: "Email",
-                              class: "form-control" %>
-    <%= error_tag f, :email %>
-  </div>
-  <div class="form-group">
-    <%= password_input f, :password, placeholder: "Password",
-                                     class: "form-control" %>
-    <%= error_tag f, :password %>
-  </div>
-  <%= submit "Create User", class: "btn btn-primary" %>
-<% end %>
+</div>

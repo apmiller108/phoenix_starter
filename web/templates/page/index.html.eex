@@ -1,31 +1,52 @@
-<h1><%= gettext "It's the  %{name}", name: "PhoenixStarter" %></h1>
+<div class="container">
+  <h1><%= gettext "It's the  %{name}", name: "PhoenixStarter" %></h1>
 
-<div>
-  <%= unless @current_user, do: link "Register", to: user_path(@conn, :new) %>
-</div>
-<div>
-  <%= if @current_user do %>
-    <%= link "Sign out",  to: session_path(@conn, :delete, @current_user), method: :delete %>
-  <% else %>
-    <%= link "Sign in",  to: session_path(@conn, :new) %>
-  <% end %>
-</div>
-<div>
-  <h3>What's in it?</h3>
-  <ul>
-    <li>
-      Password hashing with 
-      <%= link "comeonin", to: "https://github.com/riverrun/comeonin" %>
-    </li>
-    <li>
-      Browser authentication with
-      <%= link "guardian", to: "https://github.com/ueberauth/guardian" %>
-    </li>
-    <li>Simple user model with email and password, and basic validations</li>
-    <li>Postgres for persistence</li>
-    <li>
-      <%= link "Bulma", to: "http://bulma.io/" %> 
-      as css framework and grid system
-    </li>
-  </ul>
+  <div class="nav">
+    <div class="nav-left">
+      <%= unless @current_user do link "Register", to: user_path(@conn, :new), class: "nav-item" end %>
+      <%= if @current_user do %>
+        <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: :delete, class: "nav-item"%>
+      <% else %>
+        <%= link "Sign in", to: session_path(@conn, :new), class: "nav-item" %>
+      <% end %>
+    </div>
+  </div>
+
+  <article class="message is-warning">
+    <div class="message-header">
+      <h3 style="color: #fff;">What's in it?</h3>
+    </div>
+    <div class="message-body">
+      <ul>
+        <li>
+          Password hashing with 
+          <%= link "comeonin", to: "https://github.com/riverrun/comeonin" %>
+        </li>
+          Browser authentication with
+          <%= link "guardian", to: "https://github.com/ueberauth/guardian" %>
+        <li>Simple user model with email and password, and basic validations</li>
+        <li>Postgres for persistence</li>
+        <li>
+          <%= link "Bulma", to: "http://bulma.io/" %> 
+          as css framework and grid system
+        </li>
+      </ul>
+    </div>
+  </article>
+  <article class="message is-info">
+    <div class="message-header">
+      <h3>Other stuff</h3>
+    </div>
+    <div class="message-body">
+      <ul>
+        <li>
+          Maintained by
+          <%= link "Alex Miller", to: "http://alex-miller.co" %>
+        </li>
+        <li>
+          <%= link "Github repo", to: "https://github.com/apmiller108/phoenix_starter" %>
+        </li>
+      </ul>
+    </div>
+  </article>
 </div>
