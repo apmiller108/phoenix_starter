@@ -24,15 +24,16 @@
         </li>
           Browser authentication with
           <%= link "guardian", to: "https://github.com/ueberauth/guardian" %>
-        <li>Simple user model with email and password, and basic validations</li>
+        <li>User model with email and password, and basic validations</li>
         <li>Postgres for persistence</li>
         <li>
-          <%= link "Bulma", to: "http://bulma.io/" %> 
-          as css framework and grid system
+          Front end stuff: <%= link "Bulma", to: "http://bulma.io/" %> 
+          as css framework and grid system.  Included jQuery.
         </li>
       </ul>
     </div>
   </article>
+
   <article class="message is-info">
     <div class="message-header">
       <h3>Other stuff</h3>

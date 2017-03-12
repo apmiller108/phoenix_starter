@@ -4,6 +4,11 @@ defmodule PhoenixStarter.Auth do
   alias PhoenixStarter.User
   alias PhoenixStarter.Repo
 
+  def login_with_email_and_password(conn, email, _password) when is_nil(email) do
+    dummy_checkpw()
+    {:error, :not_found, conn}
+  end
+
   def login_with_email_and_password(conn, email, password) do
     user = Repo.get_by(User, email: email)
 
