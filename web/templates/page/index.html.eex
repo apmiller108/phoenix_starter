@@ -28,7 +28,12 @@
         <li>Postgres for persistence</li>
         <li>
           Front end stuff: <%= link "Bulma", to: "http://bulma.io/" %> 
-          as css framework and grid system.  Included jQuery.
+          as css framework and grid system. jQuery, too.
+        </li>
+        <li>
+          Docker containerization. See 
+          <%= link "readme", to: "https://github.com/apmiller108/phoenix_starter" %> 
+          for the setup instructions.
         </li>
       </ul>
     </div>

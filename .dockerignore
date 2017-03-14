@@ -1,4 +1,7 @@
-_docker
+_build
 deps
 node_modules
+.git
+.gitignore
 Dockerfile
+.dockerignore
