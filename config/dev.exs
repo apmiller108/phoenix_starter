@@ -33,11 +33,12 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
-# Configure your database
+# Configure your database. For docker, change hostname to 'postgres'
 config :phoenix_starter, PhoenixStarter.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "phoenix_starter_dev",
-  hostname: "localhost",
+  hostname: "postgres",
+  # hostname: "localhost",
   pool_size: 10
