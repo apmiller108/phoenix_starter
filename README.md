@@ -6,8 +6,8 @@
     [*guardian*](https://github.com/ueberauth/guardian)
   * Simple user model with `email` and `password` with basic validations
   * Postgres for persistence
-  * Front end stuff: [*Bulma*](http://bulma.io/) as css framework and grid system. 
-    Included jQuery, too.
+  * Front end stuff: [*Bulma*](http://bulma.io/) as css framework and grid system;
+    Sass support; included jQuery, too.
   * [Docker](#docker-setup)
 
 ## To rename the app
