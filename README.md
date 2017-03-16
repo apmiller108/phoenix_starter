@@ -11,11 +11,13 @@
   * [Docker](#docker-setup)
 
 ## To rename the app
-  * Edit `rename.sh`: Replace `NewName` with `YourAppName`. Replace `new_name`
-    with your `your_app_name`.
-  * Run the scripe with `sh rename.sh`
-  * Thanks to [nerdyworm](https://gist.github.com/nerdyworm) for the
-    [gist](https://gist.github.com/nerdyworm/3d623b13bf0d6d664373e2f501f16423)
+  * Make `rename.sh` script executable with `$ chmod +x rename.sh`
+  * Run `rename.sh` and pass the new name value as an argument: 
+    `$ ./sh rename.sh my_new_name`. IMPORTANT: the new name argument must to 
+    snake_case.
+  * You will be prompted to confirm the name. After confriming, all references
+    to `phoenix_starter` will be changes to `my_new_name`.  All references to
+    `PhoenixStarter` will be changed to `MyNewName`.
 
 ## To start your Phoenix app:
   * Install dependencies with `mix deps.get`

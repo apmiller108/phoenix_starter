@@ -2,18 +2,45 @@
 
 set -e
 
-NAME=$1
+NEW_OTP=$1
+NEW_NAME=""
 
-# TODO: assume snake case name. Derive module name. Confirm name with user
+# New name argument is required
+if [ $# -eq 0 ]; then
+    echo "Please provide a name in snake case. See readme for instructions https://github.com/apmiller108/phoenix_starter/blob/master/README.md"
+    exit 64
+fi
 
 CURRENT_NAME="PhoenixStarter"
 CURRENT_OTP="phoenix_starter"
 
-# NEW_NAME="NewName"
-# NEW_OTP="new_name"
+# Split snake cased new name into array of words.
+IFS="_" read -a words <<< "$NEW_OTP"
 
-# ack -l $CURRENT_NAME | xargs sed -i '' -e "s/$CURRENT_NAME/$NEW_NAME/g"
-# ack -l $CURRENT_OTP | xargs sed -i '' -e "s/$CURRENT_OTP/$NEW_OTP/g"
+# Upercase all the words and concatenate them together. This derives the app's
+# CamelCase module name.
+for word in "${words[@]}"; do
+  word="$(tr '[:lower:]' '[:upper:]' <<< ${word:0:1})${word:1}"
+  NEW_NAME="$NEW_NAME$word"
+done
 
-# mv lib/$CURRENT_OTP lib/$NEW_OTP
-# mv lib/$CURRENT_OTP.ex lib/$NEW_OTP.ex
+# Confirm name change
+GREEN="\x1B[32m"
+RED="\x1B[31m"
+NOCOL="\x1B[39m"
+
+echo -e -n "Please confirm this is correct:\nNew name: ${NEW_NAME}\nNew OTP name: $NEW_OTP\n${RED}Continue? [y/n]${NOCOL}"
+
+read -p "" ANSWER
+
+if [ "$ANSWER" = "y" ]; then
+  ack -l $CURRENT_NAME | xargs sed -i '' -e "s/$CURRENT_NAME/$NEW_NAME/g"
+  ack -l $CURRENT_OTP | xargs sed -i '' -e "s/$CURRENT_OTP/$NEW_OTP/g"
+
+  mv lib/$CURRENT_OTP lib/$NEW_OTP
+  mv lib/$CURRENT_OTP.ex lib/$NEW_OTP.ex
+  echo -e "${GREEN}Completed renaming${NOCOL}"
+else 
+  echo -e "${RED}exiting${NOCOL}"
+  exit 0
+fi
