@@ -13,8 +13,8 @@
 
 ## To rename the app
   * Make `rename.sh` script executable with `$ chmod +x rename.sh`
-  * Run `rename.sh` and pass the new name value as an argument: 
-    `$ ./sh rename.sh my_new_name`. IMPORTANT: the new name argument must to 
+  * Run `./rename.sh` and pass the new name value as an argument. Example:
+    `$ ./rename.sh my_new_name`. IMPORTANT: the new name argument must to 
     snake_case.
   * You will be prompted to confirm the name. After confriming, all references
     to `phoenix_starter` will be changes to `my_new_name`.  All references to
