@@ -23,9 +23,3 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 # Copy the app contents
 WORKDIR /app
 ADD . /app
-
-# Install mix dependencies and compile
-RUN mix do deps.get, compile
-
-# Install npm dependencies
-RUN npm install

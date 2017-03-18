@@ -31,8 +31,10 @@
   * change `hostname:` to `postgres` in `config/div.exs` under the `Repo` config
     block
   * `$ docker compose build` - to build the container 
+  * `$ docker compose run app mix deps.get` - to install dependencies
   * `$ docker compose run app mix ecto.setup` - to create and migrate the
     database
+  * `$ docker compose run app npm install` - to install Node.js dependencies
   * `$ docker compose up` - to run the app.
   * Now you can visit [`localhost:4000`](http://localhost:4000) from your 
     browser.
