@@ -34,8 +34,12 @@ echo -e -n "Please confirm this is correct:\nNew name: ${NEW_NAME}\nNew OTP name
 read -p "" ANSWER
 
 if [ "$ANSWER" = "y" ]; then
-  ack -l $CURRENT_NAME | xargs sed -i '' -e "s/$CURRENT_NAME/$NEW_NAME/g"
-  ack -l $CURRENT_OTP | xargs sed -i '' -e "s/$CURRENT_OTP/$NEW_OTP/g"
+  grep -l $CURRENT_NAME -r . --exclude-dir=_build --exclude README.md \
+    | xargs sed -i '' -e "s/$CURRENT_NAME/$NEW_NAME/g"
+  grep -l $CURRENT_OTP -r . --exclude-dir=_build --exclude README.md \
+    | xargs sed -i '' -e "s/$CURRENT_OTP/$NEW_OTP/g"
+  # ack -l $CURRENT_NAME | xargs sed -i '' -e "s/$CURRENT_NAME/$NEW_NAME/g"
+  # ack -l $CURRENT_OTP | xargs sed -i '' -e "s/$CURRENT_OTP/$NEW_OTP/g"
 
   mv lib/$CURRENT_OTP lib/$NEW_OTP
   mv lib/$CURRENT_OTP.ex lib/$NEW_OTP.ex
