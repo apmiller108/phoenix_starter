@@ -6,7 +6,8 @@
     [*guardian*](https://github.com/ueberauth/guardian)
   * Simple user model with `email` and `password` with basic validations
   * Postgres for persistence
-  * Front end stuff: [*Bulma*](http://bulma.io/) as css framework and grid system;
+  * Front end stuff: [*Bulma*](http://bulma.io/) as css framework and grid 
+    system;
     Sass support; included jQuery, too.
   * [Docker](#docker-setup)
 
@@ -30,9 +31,11 @@
   * change `hostname:` to `postgres` in `config/div.exs` under the `Repo` config
     block
   * `$ docker compose build` - to build the container 
-  * `$ docker compose run app mix ecto.create` - to create the database
+  * `$ docker compose run app mix ecto.setup` - to create and migrate the
+    database
   * `$ docker compose up` - to run the app.
-  *  Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+  * Now you can visit [`localhost:4000`](http://localhost:4000) from your 
+    browser.
   * Tip: run `docker compose run app bash` to open a bash prompt in the
     container.
   
